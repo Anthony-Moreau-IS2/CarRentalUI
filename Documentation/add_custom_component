@@ -1,0 +1,32 @@
+# Ajout d'un composant personnalisé
+
+## 1. Création d'un composant personnalisé (standalone)
+
+1. **Générer le composant**
+   ```bash
+   ng generate component components/MonComposant --standalone
+   ```
+2. **Configurer le composant**
+   - Ouvrir `mon-composant.component.ts` et vérifier que le décorateur `@Component` possède `standalone: true`.
+   - Ajouter les imports nécessaires (CommonModule, FormsModule, etc.) dans le tableau `imports` du décorateur.
+3. **Utiliser le composant**
+   - Dans le template où vous voulez l'utiliser, importer le composant :
+   ```typescript
+   import { MonComposantComponent } from './components/mon-composant/mon-composant.component';
+   ```
+   - Ajouter le composant dans le tableau `imports` du module ou du composant parent.
+   - Utiliser la balise `<app-mon-composant></app-mon-composant>` dans le HTML.
+4. **Styles et tests**
+   - Modifier le fichier `.scss` ou `.css` du composant selon vos besoins.
+   - Exécuter les tests unitaires :
+   ```bash
+   ng test
+   ```
+5. **Vérifier le rendu**
+   ```bash
+   ng serve
+   ```
+   - Ouvrir le navigateur et vérifier que le composant s'affiche correctement.
+
+---
+*Ce guide fournit les étapes essentielles pour intégrer une nouvelle librairie ou créer un composant autonome dans votre projet Angular.*

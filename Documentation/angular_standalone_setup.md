@@ -9,6 +9,7 @@ This guide outlines the steps to generate a new Angular project using **standalo
   ```bash
   npm install -g @angular/cli
   ```
+  # The installation must be doneon Command Prompt terminal
 
 ## Steps
 1. **Create a new Angular project with the `--standalone` flag**
