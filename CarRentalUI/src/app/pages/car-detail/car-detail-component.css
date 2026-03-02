@@ -1,0 +1,43 @@
+/* Car Detail — component-specific layout, uses global tokens */
+
+.car-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+.car-detail-image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-hover);
+}
+
+.car-detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.car-detail-info h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+}
+
+.description {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+}
+
+.price-section {
+    margin-bottom: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+    .car-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,28 @@
+<header class="header">
+  <div class="header-container">
+    <a routerLink="/" class="logo">
+      <span class="logo-icon">🚗</span>
+      <span class="logo-text">CarRental</span>
+    </a>
+
+    <nav class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
+      <a routerLink="/cars" routerLinkActive="active">Véhicules</a>
+      @if (authService.isAuthenticated()) {
+      <a routerLink="/reservations" routerLinkActive="active">Mes Réservations</a>
+      }
+    </nav>
+
+    <div class="header-actions">
+      @if (authService.isAuthenticated()) {
+      <a routerLink="/profile" class="btn btn--secondary btn--sm" routerLinkActive="active">
+        {{ authService.user()?.firstName }}
+      </a>
+      <button class="btn btn--ghost btn--sm" (click)="logout()">Déconnexion</button>
+      } @else {
+      <a routerLink="/login" class="btn btn--secondary btn--sm" routerLinkActive="active">Connexion</a>
+      <a routerLink="/register" class="btn btn--primary btn--sm" routerLinkActive="active">Inscription</a>
+      }
+    </div>
+  </div>
+</header>

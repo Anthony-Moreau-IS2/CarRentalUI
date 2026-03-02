@@ -1,0 +1,37 @@
+/* Profile — uses global .avatar, .info-grid, .info-item, .btn--danger */
+/* No custom styles needed beyond layout */
+
+:host {
+    display: block;
+}
+
+.profile-page {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-2xl) var(--page-padding);
+}
+
+.profile-card {
+    width: 100%;
+    max-width: var(--container-form);
+    text-align: center;
+}
+
+.profile-card .avatar {
+    margin: 0 auto var(--space-md);
+}
+
+.profile-card h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+}
+
+.role {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-transform: capitalize;
+    margin-bottom: var(--space-xl);
+}

@@ -1,0 +1,51 @@
+<div class="page-container">
+    <h1 class="page-title" style="margin-bottom: var(--space-xl);">Mes Réservations</h1>
+
+    @if (loading()) {
+    <app-loading-spinner />
+    } @else if (reservations().length === 0) {
+    <div class="empty-state">
+        <p>Vous n'avez aucune réservation.</p>
+    </div>
+    } @else {
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Véhicule</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>Prix</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (res of reservations(); track res.id) {
+                <tr>
+                    <td>#{{ res.id }}</td>
+                    <td>Véhicule #{{ res.carId }}</td>
+                    <td>{{ res.startDate }}</td>
+                    <td>{{ res.endDate }}</td>
+                    <td>{{ res.totalPrice }} €</td>
+                    <td>
+                        <span class="badge" [class.badge--success]="res.status === 'confirmee'"
+                            [class.badge--warning]="res.status === 'en_attente'"
+                            [class.badge--danger]="res.status === 'annulee'"
+                            [class.badge--neutral]="res.status === 'terminee'">
+                            {{ res.status }}
+                        </span>
+                    </td>
+                    <td>
+                        @if (res.status === 'en_attente' || res.status === 'confirmee') {
+                        <button class="btn btn--danger btn--sm" (click)="cancelReservation(res.id)">Annuler</button>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
+</div>

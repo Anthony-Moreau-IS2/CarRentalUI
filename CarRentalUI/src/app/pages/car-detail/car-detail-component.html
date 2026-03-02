@@ -1,0 +1,54 @@
+<div class="page-container">
+    @if (loading()) {
+    <app-loading-spinner />
+    } @else if (car(); as carData) {
+    <div class="car-detail-grid animate-fade-in">
+        <div class="car-detail-image">
+            <img [src]="carData.imageUrl" [alt]="carData.brand + ' ' + carData.model" />
+        </div>
+        <div class="car-detail-info">
+            <span class="badge badge--soft">{{ carData.category }}</span>
+            <h1>{{ carData.brand }} {{ carData.model }}</h1>
+            <p class="description">{{ carData.description }}</p>
+
+            <div class="info-grid info-grid--cols-2" style="margin-bottom: var(--space-xl);">
+                <div class="info-item">
+                    <span class="info-label">Année</span>
+                    <span class="info-value">{{ carData.year }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Transmission</span>
+                    <span class="info-value">{{ carData.transmission }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Carburant</span>
+                    <span class="info-value">{{ carData.fuelType }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Places</span>
+                    <span class="info-value">{{ carData.seats }}</span>
+                </div>
+            </div>
+
+            <div class="price-section">
+                <span class="price">{{ carData.pricePerDay }} €</span>
+                <span class="price__unit">/ jour</span>
+            </div>
+
+            @if (carData.available) {
+            <a routerLink="/reservations/new" [queryParams]="{ carId: carData.id }"
+                class="btn btn--primary btn--lg btn--full">
+                Réserver ce véhicule
+            </a>
+            } @else {
+            <button class="btn btn--ghost btn--lg btn--full" disabled>Indisponible</button>
+            }
+        </div>
+    </div>
+    } @else {
+    <div class="empty-state">
+        <p>Véhicule introuvable.</p>
+        <a routerLink="/cars" class="btn btn--secondary" style="margin-top: var(--space-md);">Retour aux véhicules</a>
+    </div>
+    }
+</div>

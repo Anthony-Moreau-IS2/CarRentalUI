@@ -1,0 +1,16 @@
+<aside class="sidebar" [class.open]="isOpen()">
+    <div class="sidebar-header">
+        <h3>Filtres</h3>
+        <button class="close-btn" (click)="close()">✕</button>
+    </div>
+    <div class="sidebar-content">
+        <div class="filter-group">
+            <h4>Catégorie</h4>
+            @for (cat of categories; track cat.value) {
+            <button class="filter-btn" (click)="selectCategory(cat.value)">
+                {{ cat.label }}
+            </button>
+            }
+        </div>
+    </div>
+</aside>

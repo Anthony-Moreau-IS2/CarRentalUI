@@ -1,0 +1,33 @@
+<!-- Login — refactored to use design system classes -->
+<div class="page-center">
+    <div class="card" style="--card-max-width: 440px; width: 100%; max-width: var(--card-max-width);">
+        <h2 class="card__title">Connexion</h2>
+        <p class="card__subtitle">Connectez-vous à votre compte CarRental.</p>
+
+        <form (ngSubmit)="submit()">
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" id="email" [ngModel]="email()"
+                    (ngModelChange)="email.set($event)" name="email" placeholder="votre@email.com" required />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Mot de passe</label>
+                <input class="form-input" type="password" id="password" [ngModel]="password()"
+                    (ngModelChange)="password.set($event)" name="password" placeholder="••••••••" required />
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--full" [disabled]="submitting()">
+                @if (submitting()) {
+                Connexion en cours...
+                } @else {
+                Se connecter
+                }
+            </button>
+        </form>
+
+        <p class="form-link">
+            Pas encore de compte ? <a routerLink="/register">Créer un compte</a>
+        </p>
+    </div>
+</div>
