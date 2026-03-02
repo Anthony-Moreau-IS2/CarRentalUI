@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Fond pastel -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CDE7F0"/>
+      <stop offset="100%" stop-color="#F9D5C4"/>
+    </linearGradient>
+
+    <!-- Léger highlight sur la roue -->
+    <radialGradient id="wheel" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#6B7A86" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#4B5862" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fond arrondi -->
+  <rect x="36" y="36" width="440" height="440" rx="120" fill="url(#bg)"/>
+
+  <!-- CRA -->
+  <text x="256"
+        y="285"
+        text-anchor="middle"
+        font-family="Inter, Segoe UI, Arial, sans-serif"
+        font-size="170"
+        font-weight="800"
+        fill="#FFFFFF"
+        letter-spacing="-10">
+    CRA
+  </text>
+
+  <!-- Roue unique -->
+  <g transform="translate(256 365)">
+    <!-- pneu -->
+    <circle r="54" fill="url(#wheel)"/>
+    <!-- jante -->
+    <circle r="28" fill="#EAF4F8"/>
+    <!-- centre -->
+    <circle r="8" fill="#6B7A86"/>
+
+    <!-- rayons simples -->
+    <g stroke="#6B7A86" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="-22" x2="0" y2="-10"/>
+      <line x1="0" y1="22" x2="0" y2="10"/>
+      <line x1="-22" y1="0" x2="-10" y2="0"/>
+      <line x1="22" y1="0" x2="10" y2="0"/>
+      <line x1="-16" y1="-16" x2="-8" y2="-8"/>
+      <line x1="16" y1="16" x2="8" y2="8"/>
+      <line x1="16" y1="-16" x2="8" y2="-8"/>
+      <line x1="-16" y1="16" x2="-8" y2="8"/>
+    </g>
+  </g>
+</svg>

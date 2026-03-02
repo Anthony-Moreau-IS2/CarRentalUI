@@ -58,3 +58,5 @@ This guide outlines the steps to generate a new Angular project using **standalo
   ```
 
 You now have a fresh Angular project leveraging the latest standalone component architecture.
+
+schemas UML :https://chatgpt.com/gg/v/69a5a6a18b60819bb204a06f623872fc?token=r0XNQnC5vYPbi1DtV8Fj6g
