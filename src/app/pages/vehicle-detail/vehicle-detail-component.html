@@ -4,10 +4,9 @@
     } @else if (vehicule(); as vehiculeData) {
     <div class="car-detail-grid animate-fade-in">
         <div class="car-detail-image">
-            <div
-                style="width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; background: #e2e8f0; color: #64748b; font-size: 24px;">
-                <span>{{ vehiculeData.marque }} {{ vehiculeData.modele }}</span>
-            </div>
+            <img [src]="'/images/cars/' + vehiculeData.marque.toLowerCase() + '.png'"
+                onerror="this.src='/images/cars/default.png'" alt="{{ vehiculeData.marque }} {{ vehiculeData.modele }}"
+                style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-lg);">
         </div>
         <div class="car-detail-info">
             <h1>{{ vehiculeData.marque }} {{ vehiculeData.modele }}</h1>

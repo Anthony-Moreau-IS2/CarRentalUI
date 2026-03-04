@@ -32,8 +32,8 @@
                 @for (loc of locations(); track loc.id_location) {
                 <tr>
                     <td>#{{ loc.id_location }}</td>
-                    <td>Client #{{ loc.id_client }}</td>
-                    <td>Véhicule #{{ loc.id_vehicule }}</td>
+                    <td>{{ getClientName(loc.id_client) }}</td>
+                    <td>{{ getVehiculeModel(loc.id_vehicule) }}</td>
                     <td>{{ loc.date_debut }}</td>
                     <td>{{ loc.date_fin }}</td>
                     <td><b>{{ loc.prix_total }} €</b></td>
@@ -44,12 +44,24 @@
                         </span>
                     </td>
                     <td>
-                        @if (loc.statut === 'active') {
-                        <button class="btn btn--danger btn--sm"
-                            (click)="closeLocation(loc.id_location)">Clôturer</button>
-                        } @else {
-                        <span class="text-muted">—</span>
-                        }
+                        <div style="display: flex; gap: var(--space-xs); align-items: center;">
+                            @if (loc.statut === 'active') {
+                            <button class="btn btn--danger btn--sm"
+                                (click)="closeLocation(loc.id_location)">Clôturer</button>
+                            }@else{
+
+                            <button class="btn btn--ghost btn--icon btn--sm text-danger"
+                                (click)="openDeleteModal(loc.id_location)" title="Supprimer la location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 6h18"></path>
+                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                            }
+                        </div>
                     </td>
                 </tr>
                 }
@@ -58,3 +70,26 @@
     </div>
     }
 </div>
+
+@if (showDeleteModal()) {
+<div class="modal-overlay animate-fade-in" (click)="closeDeleteModal()">
+    <div class="modal-card card animate-scale-up" (click)="$event.stopPropagation()">
+        <div class="modal-icon delete-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6h18"></path>
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+            </svg>
+        </div>
+        <h3 class="modal-title">Supprimer la location</h3>
+        <p class="modal-text">Êtes-vous sûr de vouloir supprimer cette location ? Cette action est irréversible.</p>
+        <div class="modal-actions">
+            <button class="btn btn--secondary" (click)="closeDeleteModal()">Annuler</button>
+            <button class="btn btn--danger" (click)="confirmDelete()">Supprimer définitivement</button>
+        </div>
+    </div>
+</div>
+}

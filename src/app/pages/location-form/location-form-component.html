@@ -1,48 +1,63 @@
-<div class="page-container page-container--narrow" style="margin-top: var(--space-2xl);">
-    <div class="card">
-        <h2 class="card__title">Nouvelle Location</h2>
-        <p class="card__subtitle">Associer un client à un véhicule.</p>
+<div class="page-container">
+    <div class="location-form-container">
+        <div class="form-header">
+            <h1 class="page-title">Nouvelle Location</h1>
+            <p class="page-subtitle">Enregistrez une nouvelle location de véhicule pour un client.</p>
+        </div>
 
-        <form (ngSubmit)="submit()">
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label" for="clientId">ID Client</label>
-                    <input class="form-input" type="number" id="clientId" [ngModel]="clientId()"
-                        (ngModelChange)="clientId.set($event)" name="clientId" placeholder="Ex: 1" required />
-                </div>
-                <!-- In a real app we would have a dropdown list of clients and cars here -->
-                <div class="form-group">
-                    <label class="form-label" for="vehiculeId">ID Véhicule</label>
-                    <input class="form-input" type="number" id="vehiculeId" [ngModel]="vehiculeId()"
-                        (ngModelChange)="vehiculeId.set($event)" name="vehiculeId" placeholder="Ex: 2" required />
-                </div>
-            </div>
+        <div class="form-card animate-scale-up">
+            <form (ngSubmit)="submit()">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="clientId">Client</label>
+                        <select class="form-input" id="clientId" [ngModel]="clientId()"
+                            (ngModelChange)="clientId.set($event)" name="clientId" required>
+                            <option [ngValue]="null" disabled selected>Sélectionner un client</option>
+                            @for (client of clients(); track client.id_client) {
+                            <option [ngValue]="client.id_client">{{ client.nom }} (#{{ client.id_client }})</option>
+                            }
+                        </select>
+                    </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label" for="dateDebut">Date de début</label>
-                    <input class="form-input" type="date" id="dateDebut" [ngModel]="dateDebut()"
-                        (ngModelChange)="dateDebut.set($event)" name="dateDebut" required />
-                </div>
+                    <div class="form-group">
+                        <label class="form-label" for="vehiculeId">Véhicule</label>
+                        <select class="form-input" id="vehiculeId" [ngModel]="vehiculeId()"
+                            (ngModelChange)="vehiculeId.set($event)" name="vehiculeId" required>
+                            <option [ngValue]="null" disabled selected>Sélectionner un véhicule</option>
+                            @for (vehicule of vehicules(); track vehicule.id_vehicule) {
+                            <option [ngValue]="vehicule.id_vehicule">{{ vehicule.marque }} {{ vehicule.modele }} ({{
+                                vehicule.immatriculation }})</option>
+                            }
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="dateFin">Date de fin</label>
-                    <input class="form-input" type="date" id="dateFin" [ngModel]="dateFin()"
-                        (ngModelChange)="dateFin.set($event)" name="dateFin" required />
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label class="form-label" for="dateDebut">Date de début</label>
+                        <input class="form-input" type="date" id="dateDebut" [ngModel]="dateDebut()"
+                            (ngModelChange)="dateDebut.set($event)" name="dateDebut" required />
+                    </div>
 
-            <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-lg);">
-                <button type="button" class="btn btn--secondary btn--lg" style="flex: 1;"
-                    routerLink="/locations">Annuler</button>
-                <button type="submit" class="btn btn--primary btn--lg" style="flex: 1;" [disabled]="submitting()">
-                    @if (submitting()) {
-                    Création en cours...
-                    } @else {
-                    Créer la location
+                    <div class="form-group">
+                        <label class="form-label" for="dateFin">Date de fin</label>
+                        <input class="form-input" type="date" id="dateFin" [ngModel]="dateFin()"
+                            (ngModelChange)="dateFin.set($event)" name="dateFin" required />
+                    </div>
+
+                    @if (getTotalPrice() > 0) {
+                    <div class="price-summary animate-fade-in">
+                        <span>Estimation du prix total :</span>
+                        <span class="price-total">{{ getTotalPrice() }} €</span>
+                    </div>
                     }
-                </button>
-            </div>
-        </form>
+                </div>
+
+                <div class="form-footer">
+                    <button type="button" routerLink="/locations" class="btn btn--secondary">Annuler</button>
+                    <button type="submit" class="btn btn--primary" [disabled]="submitting()">
+                        {{ submitting() ? 'Création...' : 'Créer la location' }}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
