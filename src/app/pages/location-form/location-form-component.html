@@ -1,0 +1,48 @@
+<div class="page-container page-container--narrow" style="margin-top: var(--space-2xl);">
+    <div class="card">
+        <h2 class="card__title">Nouvelle Location</h2>
+        <p class="card__subtitle">Associer un client à un véhicule.</p>
+
+        <form (ngSubmit)="submit()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="clientId">ID Client</label>
+                    <input class="form-input" type="number" id="clientId" [ngModel]="clientId()"
+                        (ngModelChange)="clientId.set($event)" name="clientId" placeholder="Ex: 1" required />
+                </div>
+                <!-- In a real app we would have a dropdown list of clients and cars here -->
+                <div class="form-group">
+                    <label class="form-label" for="vehiculeId">ID Véhicule</label>
+                    <input class="form-input" type="number" id="vehiculeId" [ngModel]="vehiculeId()"
+                        (ngModelChange)="vehiculeId.set($event)" name="vehiculeId" placeholder="Ex: 2" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="dateDebut">Date de début</label>
+                    <input class="form-input" type="date" id="dateDebut" [ngModel]="dateDebut()"
+                        (ngModelChange)="dateDebut.set($event)" name="dateDebut" required />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="dateFin">Date de fin</label>
+                    <input class="form-input" type="date" id="dateFin" [ngModel]="dateFin()"
+                        (ngModelChange)="dateFin.set($event)" name="dateFin" required />
+                </div>
+            </div>
+
+            <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-lg);">
+                <button type="button" class="btn btn--secondary btn--lg" style="flex: 1;"
+                    routerLink="/locations">Annuler</button>
+                <button type="submit" class="btn btn--primary btn--lg" style="flex: 1;" [disabled]="submitting()">
+                    @if (submitting()) {
+                    Création en cours...
+                    } @else {
+                    Créer la location
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

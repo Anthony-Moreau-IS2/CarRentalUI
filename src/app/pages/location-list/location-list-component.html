@@ -1,0 +1,60 @@
+<div class="page-container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xl);">
+        <div>
+            <h1 class="page-title">Toutes les Locations</h1>
+            <p class="page-subtitle">Suivi des locations de véhicules.</p>
+        </div>
+        <a routerLink="/locations/new" class="btn btn--primary">Nouvelle Location</a>
+    </div>
+
+    @if (loading()) {
+    <app-loading-spinner />
+    } @else if (locations().length === 0) {
+    <div class="empty-state">
+        <p>Aucune location enregistrée.</p>
+    </div>
+    } @else {
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Véhicule</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>Prix Total</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (loc of locations(); track loc.id_location) {
+                <tr>
+                    <td>#{{ loc.id_location }}</td>
+                    <td>Client #{{ loc.id_client }}</td>
+                    <td>Véhicule #{{ loc.id_vehicule }}</td>
+                    <td>{{ loc.date_debut }}</td>
+                    <td>{{ loc.date_fin }}</td>
+                    <td><b>{{ loc.prix_total }} €</b></td>
+                    <td>
+                        <span class="badge" [class.badge--success]="loc.statut === 'active'"
+                            [class.badge--neutral]="loc.statut === 'terminee'">
+                            {{ loc.statut }}
+                        </span>
+                    </td>
+                    <td>
+                        @if (loc.statut === 'active') {
+                        <button class="btn btn--danger btn--sm"
+                            (click)="closeLocation(loc.id_location)">Clôturer</button>
+                        } @else {
+                        <span class="text-muted">—</span>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
+</div>

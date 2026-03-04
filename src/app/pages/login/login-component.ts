@@ -7,7 +7,7 @@ import { NotificationService } from '../../services/notification.service';
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [FormsModule, RouterLink],
+    imports: [FormsModule],
     templateUrl: './login-component.html',
     styleUrl: './login-component.css'
 })
@@ -16,22 +16,22 @@ export class Login {
     private readonly router = inject(Router);
     private readonly notificationService = inject(NotificationService);
 
-    protected readonly email = signal('');
-    protected readonly password = signal('');
+    protected readonly identifiant = signal('');
+    protected readonly motDePasse = signal('');
     protected readonly submitting = signal(false);
 
     submit(): void {
         this.submitting.set(true);
         this.authService.login({
-            email: this.email(),
-            password: this.password()
+            identifiant: this.identifiant(),
+            mot_de_passe: this.motDePasse()
         }).subscribe({
-            next: () => {
-                this.notificationService.success('Connexion réussie !');
+            next: (response) => {
+                this.notificationService.success(response.message || 'Connexion réussie !');
                 this.router.navigate(['/']);
             },
             error: () => {
-                this.notificationService.error('Email ou mot de passe incorrect.');
+                this.notificationService.error('Identifiant ou mot de passe incorrect.');
                 this.submitting.set(false);
             }
         });

@@ -1,0 +1,45 @@
+<div class="page-container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xl);">
+        <div>
+            <h1 class="page-title">Nos Clients</h1>
+            <p class="page-subtitle">Gérez la liste de vos clients.</p>
+        </div>
+        <a routerLink="/clients/new" class="btn btn--primary">Ajouter un client</a>
+    </div>
+
+    @if (loading()) {
+    <app-loading-spinner />
+    } @else if (clients().length === 0) {
+    <div class="empty-state">
+        <p>Aucun client enregistré.</p>
+    </div>
+    } @else {
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Contact</th>
+                    <th>Permis de conduire</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (client of clients(); track client.id_client) {
+                <tr>
+                    <td>#{{ client.id_client }}</td>
+                    <td><b>{{ client.nom }}</b></td>
+                    <td>{{ client.contact }}</td>
+                    <td>{{ client.numero_permis }}</td>
+                    <td>
+                        <button class="btn btn--danger btn--sm"
+                            (click)="deleteClient(client.id_client)">Supprimer</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
+</div>
