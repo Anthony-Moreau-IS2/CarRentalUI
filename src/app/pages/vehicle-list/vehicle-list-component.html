@@ -15,12 +15,10 @@
         @for (vehicule of vehicules(); track vehicule.id_vehicule) {
         <div class="car-card animate-fade-in">
             <div class="car-image">
-                <!-- Using placeholder since BE doesn't provide images -->
-                <div
-                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e2e8f0; color: #64748b;">
-                    <span>{{ vehicule.marque }} {{ vehicule.modele }}</span>
-                </div>
-                <!-- statut -->
+                <img [src]="'/images/cars/' + vehicule.marque.toLowerCase() + '.png'"
+                    onerror="this.src='/images/cars/default.png'" alt="{{ vehicule.marque }} {{ vehicule.modele }}"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+
                 <span class="badge" [class.badge--success]="vehicule.statut === 'disponible'"
                     [class.badge--warning]="vehicule.statut !== 'disponible'"
                     style="position: absolute; top: 12px; right: 12px;">

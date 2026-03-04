@@ -1,0 +1,66 @@
+.text-danger {
+    color: var(--error);
+}
+
+.btn--icon {
+    padding: var(--space-xs);
+    border-radius: var(--radius-md);
+}
+
+.btn--icon:hover {
+    background: var(--error-light);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-card {
+    max-width: 400px;
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.modal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-md);
+}
+
+.delete-icon {
+    background: var(--error-light);
+    color: var(--error);
+}
+
+.modal-title {
+    margin-bottom: var(--space-xs);
+}
+
+.modal-text {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+}
+
+.modal-actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: stretch;
+}
+
+.modal-actions button {
+    flex: 1;
+}
