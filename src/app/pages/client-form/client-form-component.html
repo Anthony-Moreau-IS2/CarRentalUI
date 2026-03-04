@@ -1,0 +1,38 @@
+<div class="page-container page-container--narrow" style="margin-top: var(--space-2xl);">
+    <div class="card">
+        <h2 class="card__title">Nouveau Client</h2>
+        <p class="card__subtitle">Enregistrer un nouveau client dans le système.</p>
+
+        <form (ngSubmit)="submit()">
+            <div class="form-group">
+                <label class="form-label" for="nom">Nom complet</label>
+                <input class="form-input" type="text" id="nom" [ngModel]="nom()" (ngModelChange)="nom.set($event)"
+                    name="nom" required />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="contact">Contact (Email ou Téléphone)</label>
+                <input class="form-input" type="text" id="contact" [ngModel]="contact()"
+                    (ngModelChange)="contact.set($event)" name="contact" required />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="numeroPermis">Numéro de permis</label>
+                <input class="form-input" type="text" id="numeroPermis" [ngModel]="numeroPermis()"
+                    (ngModelChange)="numeroPermis.set($event)" name="numeroPermis" required />
+            </div>
+
+            <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-xl);">
+                <button type="button" class="btn btn--secondary btn--lg" style="flex: 1;" (click)="nom.set('')"
+                    routerLink="/clients">Annuler</button>
+                <button type="submit" class="btn btn--primary btn--lg" style="flex: 1;" [disabled]="submitting()">
+                    @if (submitting()) {
+                    Enregistrement...
+                    } @else {
+                    Enregistrer
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

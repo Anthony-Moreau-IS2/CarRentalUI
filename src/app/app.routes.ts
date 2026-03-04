@@ -7,30 +7,36 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/home/home-component').then(m => m.Home)
     },
     {
-        path: 'cars',
-        loadComponent: () => import('./pages/car-list/car-list-component').then(m => m.CarList)
+        path: 'vehicles',
+        loadComponent: () => import('./pages/vehicle-list/vehicle-list-component').then(m => m.VehicleList)
     },
     {
-        path: 'cars/:id',
-        loadComponent: () => import('./pages/car-detail/car-detail-component').then(m => m.CarDetail)
+        path: 'vehicles/:id',
+        loadComponent: () => import('./pages/vehicle-detail/vehicle-detail-component').then(m => m.VehicleDetail)
     },
     {
-        path: 'reservations',
-        loadComponent: () => import('./pages/reservation-list/reservation-list-component').then(m => m.ReservationList),
+        path: 'locations',
+        loadComponent: () => import('./pages/location-list/location-list-component').then(m => m.LocationList),
         canActivate: [authGuard]
     },
     {
-        path: 'reservations/new',
-        loadComponent: () => import('./pages/reservation-form/reservation-form-component').then(m => m.ReservationForm),
+        path: 'locations/new',
+        loadComponent: () => import('./pages/location-form/location-form-component').then(m => m.LocationForm),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'clients',
+        loadComponent: () => import('./pages/client-list/client-list-component').then(m => m.ClientList),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'clients/new',
+        loadComponent: () => import('./pages/client-form/client-form-component').then(m => m.ClientForm),
         canActivate: [authGuard]
     },
     {
         path: 'login',
         loadComponent: () => import('./pages/login/login-component').then(m => m.Login)
-    },
-    {
-        path: 'register',
-        loadComponent: () => import('./pages/register/register-component').then(m => m.Register)
     },
     {
         path: 'profile',

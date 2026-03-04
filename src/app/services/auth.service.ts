@@ -2,7 +2,7 @@ import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { User, LoginRequest, RegisterRequest, AuthResponse } from '../models/user.model';
+import { Utilisateur, LoginRequest, LoginResponse } from '../models/utilisateur.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +11,7 @@ export class AuthService {
     private readonly router = inject(Router);
     private readonly apiUrl = `${environment.apiUrl}/auth`;
 
-    private readonly currentUser = signal<User | null>(null);
+    private readonly currentUser = signal<Utilisateur | null>(null);
     readonly user = this.currentUser.asReadonly();
     readonly isAuthenticated = computed(() => !!this.currentUser());
 
@@ -19,22 +19,15 @@ export class AuthService {
         this.loadUserFromStorage();
     }
 
-    login(credentials: LoginRequest): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
+    login(credentials: LoginRequest): Observable<LoginResponse> {
+        return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
             tap(response => {
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('user', JSON.stringify(response.user));
-                this.currentUser.set(response.user);
-            })
-        );
-    }
-
-    register(data: RegisterRequest): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.apiUrl}/register`, data).pipe(
-            tap(response => {
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('user', JSON.stringify(response.user));
-                this.currentUser.set(response.user);
+                // Pour simplifier, on stocke un token fictif si le backend n'en renvoie pas,
+                // ou on pourrait adapter l'interceptor pour ne plus envoyer de Bearer token s'il utilise des cookies.
+                // Dans le cas de cette API, on dirait qu'elle retourne {message, utilisateur}.
+                localStorage.setItem('token', 'dummy-token');
+                localStorage.setItem('user', JSON.stringify(response.utilisateur));
+                this.currentUser.set(response.utilisateur);
             })
         );
     }
@@ -50,7 +43,7 @@ export class AuthService {
         return localStorage.getItem('token');
     }
 
-    getCurrentUser(): User | null {
+    getCurrentUser(): Utilisateur | null {
         return this.currentUser();
     }
 

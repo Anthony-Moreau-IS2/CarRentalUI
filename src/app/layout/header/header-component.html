@@ -7,21 +7,21 @@
 
     <nav class="nav-links">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
-      <a routerLink="/cars" routerLinkActive="active">Véhicules</a>
+      <a routerLink="/vehicles" routerLinkActive="active">Véhicules</a>
       @if (authService.isAuthenticated()) {
-      <a routerLink="/reservations" routerLinkActive="active">Mes Réservations</a>
+      <a routerLink="/locations" routerLinkActive="active">Locations</a>
+      <a routerLink="/clients" routerLinkActive="active">Clients</a>
       }
     </nav>
 
     <div class="header-actions">
       @if (authService.isAuthenticated()) {
       <a routerLink="/profile" class="btn btn--secondary btn--sm" routerLinkActive="active">
-        {{ authService.user()?.firstName }}
+        {{ authService.user()?.identifiant }}
       </a>
       <button class="btn btn--ghost btn--sm" (click)="logout()">Déconnexion</button>
       } @else {
-      <a routerLink="/login" class="btn btn--secondary btn--sm" routerLinkActive="active">Connexion</a>
-      <a routerLink="/register" class="btn btn--primary btn--sm" routerLinkActive="active">Inscription</a>
+      <a routerLink="/login" class="btn btn--primary btn--sm" routerLinkActive="active">Connexion</a>
       }
     </div>
   </div>

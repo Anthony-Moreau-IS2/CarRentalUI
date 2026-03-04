@@ -1,24 +1,12 @@
 <div class="profile-page">
     @if (authService.user(); as user) {
     <div class="profile-card card animate-fade-in">
-        <div class="avatar">{{ user.firstName[0] }}{{ user.lastName[0] }}</div>
-        <h1>{{ user.firstName }} {{ user.lastName }}</h1>
-        <p class="role">{{ user.role }}</p>
+        <div class="avatar">{{ user.identifiant[0].toUpperCase() }}</div>
+        <h1>{{ user.identifiant }}</h1>
+        <p class="role">Utilisateur système (#{{ user.id_utilisateur }})</p>
 
-        <div class="info-grid" style="text-align: left; margin-bottom: var(--space-xl);">
-            <div class="info-item">
-                <span class="info-label">Email</span>
-                <span class="info-value">{{ user.email }}</span>
-            </div>
-            @if (user.phone) {
-            <div class="info-item">
-                <span class="info-label">Téléphone</span>
-                <span class="info-value">{{ user.phone }}</span>
-            </div>
-            }
-        </div>
-
-        <button class="btn btn--danger btn--full btn--lg" (click)="authService.logout()">Déconnexion</button>
+        <button class="btn btn--danger btn--full btn--lg" style="margin-top: var(--space-xl);"
+            (click)="authService.logout()">Déconnexion</button>
     </div>
     }
 </div>
